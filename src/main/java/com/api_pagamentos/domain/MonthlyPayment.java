@@ -19,8 +19,9 @@ public class MonthlyPayment {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private Boolean payed;
-    private LocalDateTime payedAt;
+    private Boolean paid;
+    private LocalDateTime paidAt;
+    private Double value;
     private LocalDateTime expiresAt;
     private LocalDateTime createdAt;
     private String externalPaymentId;
@@ -35,8 +36,6 @@ public class MonthlyPayment {
     protected void onCreate(){
         createdAt = LocalDateTime.now();
     }
-
-
 
     public MonthlyPayment(){}
 }

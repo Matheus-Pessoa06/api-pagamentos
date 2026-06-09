@@ -25,6 +25,10 @@ public class Users {
     private String phoneNumber;
     private String stripeCustomerId;
 
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 
     private List<MonthlyPayment> monthlyPayments = new ArrayList<>();

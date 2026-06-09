@@ -20,6 +20,7 @@ public class PaymentValue {
     private UUID id;
 
     private Double value;
+    private String stripePriceId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 

@@ -41,16 +41,15 @@ public class Company {
         updatedAt = LocalDateTime.now();
     }
 
-    @OneToMany(mappedBy = "company_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Users> users = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
-            name= "payment_method",
+            name= "company_payment_method",
             joinColumns = @JoinColumn(name = "company_payment_id"),
             inverseJoinColumns = @JoinColumn(name = "payment_method_id")
     )
-
     private List<PaymentMethod> enablePaymentMethods = new ArrayList<>();
 
     public Company(){}

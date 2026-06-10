@@ -54,15 +54,7 @@ public class StripeService {
     }
 
     public Map<String, String> createInvoice(String stripeCustomerId, String stripePriceId, LocalDateTime dueDate) throws StripeException {
-
-        InvoiceItemCreateParams itemParams = InvoiceItemCreateParams.builder()
-                .setCustomer(stripeCustomerId)
-                .setPrice(stripePriceId)
-                .build();
-        InvoiceItem.create(itemParams);
-
         long dueDateEpoch = dueDate.atZone(ZoneId.systemDefault()).toEpochSecond();
-
 
         InvoiceCreateParams invoiceParams = InvoiceCreateParams.builder()
                 .setCustomer(stripeCustomerId)
@@ -70,6 +62,13 @@ public class StripeService {
                 .setDueDate(dueDateEpoch)
                 .build();
         Invoice invoice = Invoice.create(invoiceParams);
+
+        InvoiceItemCreateParams itemParams = InvoiceItemCreateParams.builder()
+                .setCustomer(stripeCustomerId)
+                .setPrice(stripePriceId)
+                .setInvoice(invoice.getId())
+                .build();
+        InvoiceItem.create(itemParams);
 
         Invoice finalizedInvoice = invoice.finalizeInvoice();
 

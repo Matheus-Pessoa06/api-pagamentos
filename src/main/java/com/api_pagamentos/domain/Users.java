@@ -1,5 +1,6 @@
 package com.api_pagamentos.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,7 +31,7 @@ public class Users {
     private Company company;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-
+    @JsonIgnore
     private List<MonthlyPayment> monthlyPayments = new ArrayList<>();
 
     public Users(){}
